@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Conhecendo a API Stream do java 8 – Parte 2 - Blog pessoal de Athos Bonner</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Blog pessoal de Athos Bonner" property="og:site_name">
+  
+    <meta content="Conhecendo a API Stream do java 8 – Parte 2" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes." property="og:description">
+  
+  
+    <meta content="http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-2/" property="og:url">
+  
+  
+    <meta content="2017-09-12T07:32:20-03:00" property="article:published_time">
+    <meta content="http://localhost:4000/about/" property="article:author">
+  
+  
+    <meta content="http://localhost:4000/athosbonner.github.io/assets/img/stream-parte-2.png" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Holidays" property="article:tag">
+    
+    <meta content="Hawaii" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@athosbonner">
+  
+    <meta name="twitter:title" content="Conhecendo a API Stream do java 8 – Parte 2">
+  
+  
+    <meta name="twitter:url" content="http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-2/">
+  
+  
+    <meta name="twitter:description" content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes.">
+  
+  
+    <meta name="twitter:image:src" content="http://localhost:4000/athosbonner.github.io/assets/img/stream-parte-2.png">
+  
+
+	<meta name="description" content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/athosbonner.github.io/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/athosbonner.github.io/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/athosbonner.github.io/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/athosbonner.github.io/"><img src="/athosbonner.github.io/assets/img/athosbonner.jpg" alt="Athos Bonner"></a>
+      </div>
+      <div class="author-name">Athos Bonner</div>
+      <p>Meu nome é Athos Bonner. Sou desenvoldedor de software e nas horas vagas escrevo, assisto séries, estudo, leio livros sobre biografias e o mais importante, corro de 3 a 10km.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/athosbonner" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="http://github.com/athosbonner" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/athos-bonner-28893441" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:athos.sti@hotmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Athos Bonner</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/athosbonner.github.io/assets/img/stream-parte-2.png alt="Conhecendo a API Stream do java 8 – Parte 2">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Conhecendo a API Stream do java 8 – Parte 2</h1>
+        <div class="page-date"><span>2017, Sep 12&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Esta é a segunda parte da nossa saga de posts sobre a API Stream, incorporada no Java 8.</p>
+
+<p>Hoje vamos trabalhar com Coleções de dados e mostrar um pouco do que o Stream é capaz.</p>
+
+<p>Vamos começar convertendo o Stream em lista com o Stream.collect().
+Stream.collect( Collectors.toList() )
+Usando .Collect para converver um Stream em Lista</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+
+    //Convertendo lista para Stream
+    Stream&lt;Integer&gt; stream = lista.stream();
+
+    //Convertendo Stream em Lista
+    List&lt;Integer&gt; convertendoParaLista = stream.collect(Collectors.toList());
+</code></pre></div></div>
+
+<p>System.out.println(convertendoParaLista);</p>
+
+<p>Agora vamos converter uma Stream em Array.
+        Stream.toArray( )</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+
+    Stream&lt;Integer&gt; stream = lista.stream();
+
+    //Convetendo Stream em Array com a classe toArray passando o tipo do array.
+    Integer[] convetendoStreamEmArray = stream.toArray(Integer[]::new);
+
+    System.out.println(convetendoStreamEmArray);
+</code></pre></div></div>
+
+<p>Não podemos negar que é muito simples e fácil.
+Retornando lista sem dados repetidos – Stream.distinct()
+Uma das funcionalidades que eu mais gosto é o distinct(), me salvou na primeira vez que precisei.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+    lista.add(1);
+    lista.add(2);
+    lista.add(3);
+    lista.add(4);
+    lista.add(4);
+
+    Stream&lt;Integer&gt; stream = lista.stream();
+
+    //Converendo Stream em lista sem repetidos
+    List&lt;Integer&gt; listaSemRepetidos = stream.distinct().collect(Collectors.toList());
+
+    //Imprimindo todos os dados da lista.
+    listaSemRepetidos.forEach(System.out::println);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>1
+2
+3
+4</p>
+
+<p>Operações Intermediárias
+Dentro do Stream temos algumas funções que nos ajuda a fazer uma pesquisa mais completa dentro de uma lista.
+Stream.filter()</p>
+
+<p>Abaixo estamos usando o método filter do Stream, estou trazendo uma contagem de quantos homens de ferro existem na lista.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("Homemerro");
+    lista.add("Doutoranho");
+    lista.add("Capitãoica");
+    lista.add("Viúvaa");
+    lista.add("Homemerro");
+    lista.add("ThorStream&lt;String&gt; stream = lista.stream();
+
+    long hero = stream.filter((item) -&gt; item.equals("Homem de Ferro")).count();
+
+    System.out.println(hero);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>2</p>
+
+<p>Stream.map()
+Com o map() podemos fazer manipulação dos dados em questão.
+A seguir estou convertendo os objetos que estão sendo processados para maiúsculo, mas podemos fazer qualquer tipo de operação.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("Homemerro");
+    lista.add("Doutoranho");
+    lista.add("Capitãoica");
+    lista.add("Viúvaa");
+    lista.add("ThorStream&lt;String&gt; stream = lista.stream();
+
+    stream.filter((item) -&gt; item.equals("Homem de Ferro")).map(String::toUpperCase).forEach(System.out::println);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>HOMEM DE FERRO</p>
+
+<p>Outro exemplo</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("Homemerro");
+    lista.add("Doutoranho");
+    lista.add("Capitãoica");
+    lista.add("Viúvaa");
+    lista.add("ThorStream&lt;String&gt; stream = lista.stream();
+
+    stream.filter((item) -&gt; item.equals("Homem de Ferro")).map((item) -&gt;{
+
+    //Se esse for o home de ferro então faça alguma coisa
+    if (item.equals("Homem de Ferro")) {
+    item += " - Esse é o Tony Stark";
+    }
+
+    //Retornando o dado tratado.
+    return item;
+
+    }).forEach(System.out::println);
+
+    }
+</code></pre></div></div>
+
+<p>Resultado :</p>
+
+<p>Homem de Ferro - Esse é o Tony Stark</p>
+
+<p>Stream.sorted()
+O Sorted() retorna os dados em ordem alfabética, mas você pode usar um comparator para personalizar essa ordenação se for o caso.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("Homemerro");
+    lista.add("Doutoranho");
+    lista.add("Capitãoica");
+    lista.add("Viúvaa");
+    lista.add("ThorStream&lt;String&gt; stream = lista.stream();
+
+    stream.sorted().map(String::toUpperCase).forEach(System.out::println);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>CAPITÃO AMERICA
+DOUTOR ESTRANHO
+HOMEM DE FERRO
+THOR
+VIÚVA NEGRA</p>
+
+<p>Terminal operations
+Operações de terminal produzem um resultado não-fluxo, como valor primitivo, uma coleta ou nenhum valor.
+As operações de terminal são normalmente precedidas por operações intermediárias que retornam outro fluxo que permite que as operações sejam conectadas em uma forma de consulta.
+Stream.collect ()
+Esse método retorna uma lista a partir de uma Stream, já usamos antes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+
+    //Convertendo lista para Stream
+    Stream&lt;Integer&gt; stream = lista.stream();
+
+    //Convertendo Stream em Lista
+    List&lt;Integer&gt; convertendoParaLista = stream.collect(Collectors.toList());
+
+    System.out.println(convertendoParaLista);
+
+    Stream.forEach () O método forEach() percorre cada elemento da lista, você pode fazer operações dos objetos com a expressões lambda é uma forma simplificada de escrever um loop.
+
+    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+    lista.forEach(System.out::println);
+</code></pre></div></div>
+
+<p>Como podemos ver no java 8, dentro de cada coleção de dados temos um método forEach para percorrer todo os objetos da lista.
+Stream.match ()
+O método match() também é um dos meus preferidos, ele vai retornar boolean quando uma determinada operação for satisfatória, abaixo mostro três exemplos com os métodos, anyMatch(), allMatch(), nomeMatch()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("HOMEMERRO");
+
+    boolean retorno = true;
+    //Usando anyMatch, retorna true se item for iqual a HOMEN DE FERRO
+    retorno = lista.stream().anyMatch((item)-&gt; item.equals(“HOMEM DE FERRO”));
+    System.out.println(retorno);
+    //Retorna true se item começar com a letra A
+    retorno = lista.stream().allMatch((item) -&gt; item.startsWith(“A”));
+    System.out.println(retorno);
+    //Retorna true se o item não corresponder a condição.
+    retorno = lista.stream().noneMatch((item)-&gt; item.endsWith(“g”));
+
+    System.out.println(retorno);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>true
+false
+true</p>
+
+<p>Stream.count ()
+O método count() também já usamos aqui, ele simplesmente retorna a quantidade de item de uma lista e estamos usando em conjunto com o método filter para fazer uma pesquisa mais completa dentro da lista.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+    lista.add("HOMEMERRO");
+    lista.add("HOMEMERRO");
+    lista.add("HOMEMERRO");
+
+    long resultado = lista.stream().filter((item) -&gt; item.equals(“HOMEM DE FERRO”)).count();
+
+    System.out.println(resultado);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+
+    Stream.reduce ()
+</code></pre></div></div>
+
+<p>O reduce() realiza uma redução dos elementos de um fluxo com uma função especificada e retorna um Optional()  com o valor reduzido.</p>
+
+<p>É equivalente a expressão:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    boolean foundAny = false;
+        T result = null;
+        for (T element : this stream) {
+            if (!foundAny) {
+                foundAny = true;
+                result = element; } else result = accumulator.apply(result, element); } return foundAny ? Optional.of(result) : Optional.empty(); }
+</code></pre></div></div>
+
+<p>Exemplo de utilização do reduce(), estou usando para somar todos os valores da minha lista de tipo Integer.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    List&lt;Integer&gt; lista = new ArrayList&lt;&gt;();
+    lista.add(1);
+    lista.add(2);
+    lista.add(3);
+
+    //Somando todos os valores da lista.
+    Optional&lt;Integer&gt; reduced = lista.stream().reduce((s1,s2) -&gt; s1 + s2);
+
+    //Imprimindo se for satisfatória
+    reduced.ifPresent(System.out::println);
+</code></pre></div></div>
+
+<p>Resultado:</p>
+
+<p>6</p>
+
+<p>Como podemos ver, a API Stream do java 8 nos ajuda muito, com pouco código fazemos muito.</p>
+
+<p>Essa foi a segunda parte da saga API Stream Java 8.</p>
+
+<p>Espero ter ajudado.</p>
+
+<p>See you later…</p>
+
+<p>Download dos exemplos desse post e do primeiro no meu GitHub. Acesse aqui</p>
+
+<p>PARA SABER MAIS:</p>
+
+<p>Java 8 Stream API
+https://howtodoinjava.com/java8/java-streams-by-examples/</p>
+
+<p>Documentation java.util.Stream
+https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html</p>
+
+<p>Java Code Examples for java.util.stream.Stream.builder();
+https://www.programcreek.com/java-api-examples/?class=java.util.stream.Stream&amp;method=builder</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Conhecendo a API Stream do java 8 – Parte 2&url=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-2/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-2/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-2/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/athosbonner.github.io/tags#Holidays" class="tag">&#35; Holidays</a>
+          
+            <a href="/athosbonner.github.io/tags#Hawaii" class="tag">&#35; Hawaii</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//mr-brown.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

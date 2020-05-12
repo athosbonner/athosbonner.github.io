@@ -1,0 +1,71 @@
+I"c<p>Controle de versão hoje em dia é indispensável para o desenvolvimento de software, principalmente quando estamos em equipe.</p>
+
+<p>Controle de versão serve para versionar seu código fonte e manter versões de códigos desenvolvido por toda equipe e caso tenha bug, erros, alguma anomalia no seu código a versão pode ser revertida para o estado anterior ou alguma outra versão que deseja.</p>
+
+<p>Para que o controle de versão aconteca existe alguns softwares no mercado que você poderá usar.</p>
+
+<p>Exemplos de softwares para controle de versão mais conhecido no mercado:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVN (Subversion)
+GIT
+Mercurial
+</code></pre></div></div>
+
+<p>O objetivo é implementar suas modificações e deixar o código em um lugar seguro onde todos da equipe possam ver e ter acesso.</p>
+
+<p>Nesse post vou mostrar apenas comandos básicos do GIT.</p>
+
+<p>Para iniciar o git no diretório da aplicação que você esta desenvolvendo digite em seu terminal após ter instalado em sua maquina.</p>
+
+<p>git init</p>
+
+<p>Isso mesmo, apenas isso vai tornar o seu diretório versionavél.</p>
+
+<p>Se você já tem um repositório com algum projeto, você terá que fazer o clone desse projeto para sua maquina, então digite:</p>
+
+<p>git clone [link do clone]
+Exemplo :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/libgit2/libgit2
+</code></pre></div></div>
+
+<p>Atualizando o seu projeto com as modificações do servidor.
+Exemplo:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git pull
+</code></pre></div></div>
+
+<p>Para você saber qual o status dos arquivos que foram modificados</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
+</code></pre></div></div>
+
+<p>Com esse comando você verá os arquivos em vermelhos, são arquivos que foram modificados e podem ser versionados.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add .
+</code></pre></div></div>
+
+<p>Com o comando git add . você está adicionando todos os arquivos para serem versionados, então os arquivos que você viu em vermelho com o git status agora vão está todos verdes.</p>
+
+<p>Você pode dar um git status novamente para conferir.</p>
+
+<p>Agora os arquivos estão prontos para realizar o commit e depois o push.</p>
+
+<p>Quando você faz o commit o git prepara seus arquivos ainda em sua maquina com uma descrição colocada por você referenciando o que foi feito, essa descrição também vai ficar no servidor onde está hospedado seu código quando você fizer o push.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m "Finalizando rotina de Cadastro de Cliente"
+</code></pre></div></div>
+
+<p>Comando git com a mensagem de identificação.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push 
+</code></pre></div></div>
+
+<p>Esse comando sobe todos os arquivos adicionados para o servidor, junto com sua descrição.</p>
+
+<p>Pronto, agora você pode ir lá no seu servidor e ver a última modificação com sua descrição e todos da equipe também poderá ver e baixar.</p>
+
+<p>Qualquer coisa, comenta ai.</p>
+
+<p>Espero que tenha ajudado, até mais.</p>
+:ET

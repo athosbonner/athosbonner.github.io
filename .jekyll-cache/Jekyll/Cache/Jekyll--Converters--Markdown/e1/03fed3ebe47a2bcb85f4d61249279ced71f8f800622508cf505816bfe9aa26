@@ -1,0 +1,209 @@
+I"$<p>Fala galera, tudo bem ?</p>
+
+<p>Neste tutorial irei mostrar como disponibilizar um endpoint com os Framework:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spring web
+JPA
+Rest Repository
+</code></pre></div></div>
+
+<p>Para esse tutorial vamos usar o spring start io para criar um projeto no Spring com os Framework em questão.</p>
+
+<p>O projeto criado nesse site vem com as classes de configuração do Spring, então não precisamos nos preocupar com isso.</p>
+
+<p>Vamos começar acessando o site spring start io e criando um projeto como mostra a imagem abaixo.</p>
+
+<p>Exportando do Spring IO</p>
+
+<p><img src="/athosbonner.github.io/assets/img/1-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 1</p>
+
+<p>Para nosso exemplo foi escolhido um projeto com Maven, Java e as dependências do Spring Web, JPA, Rest Repository.</p>
+
+<p>Para esse tutorial não vamos usar nenhum banco de dados, porém você pode usar qualquer um de sua preferência.</p>
+
+<p>A versão que estou usando do java é a 8, mas temos a opção de usar até a 13 que nesse momento é a mais atual.</p>
+
+<p>Feito isso, apenas iremos importar como um projeto Maven na sua IDE de preferência, no meu caso estou usando a do próprio Spring – Spring tools na versão 4 .</p>
+
+<p>IDE_projeto_importado</p>
+
+<p><img src="/athosbonner.github.io/assets/img/2-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 2</p>
+
+<p>Esse é o projeto importado no Spring Tools 4.</p>
+
+<p>A classe CrudApplication.java tem um método main() conforme abaixo.</p>
+
+<p>public static void main(String[] args) {
+       SpringApplication.run(CrudApplication.class, args);
+}</p>
+
+<p>Ele é o responsável por inicializar seu projeto.</p>
+
+<p>Agora é hora de colocar a mão na massa.</p>
+
+<p>Nosso projeto terá dois beans e duas interfaces que serão Autor e Livro.</p>
+
+<p>Beans:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Autor.java
+Livro.java
+</code></pre></div></div>
+
+<p>E iremos criar os repositórios dos beans.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AutorRepository.java
+LivroRepository.java
+</code></pre></div></div>
+
+<p>E por fim, iremos criar nossa classe que será o Controller para disponibilizar o EndPoint.</p>
+
+<p>Então nossos beans ficaram assim.</p>
+
+<p>OsBens</p>
+
+<p><img src="/athosbonner.github.io/assets/img/3-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 3</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+</code></pre></div></div>
+
+<p>O código para você copiar.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Entity //Indica que essa classe também é uma tabela no banco de dados
+public class Autor {
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+@NotBlank
+private String nome;
+
+ 
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+public class Livro {
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+
+@NotBlank
+private String titulo;
+
+@NotBlank
+private String descricao;
+
+@Min(30)
+private Integer numeroPagina;
+
+@Valid
+@ManyToMany(fetch = FetchType.EAGER)
+private Set&lt;Autor&gt; autores = new HashSet&lt;&gt;();
+
+public void add(Autor autor) {
+autores.add(autor);
+}
+</code></pre></div></div>
+
+<p>Agora que temos nossos beans criados, precisamos criar nossas interfaces e cada interface irá estender a Classe CrudRepository é com essa classe que o Spring saberá qual bean ele está tratando e poderá trabalhar “automagicamente” em qualquer operação de CRUD que queiramos usar.</p>
+
+<p>interfaces</p>
+
+<p><img src="/athosbonner.github.io/assets/img/4-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 4</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.springframework.data.repository.CrudRepository;
+import com.br.crud.rest.crud.model.Livro;
+
+public interface LivroRepository extends CrudRepository&lt;Livro, Long&gt;{
+
+}
+
+
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.br.crud.rest.crud.model.Autor;
+
+public interface AutorRepository extends CrudRepository&lt;Autor, Long&gt; {
+    
+}
+</code></pre></div></div>
+
+<p>Como podemos perceber é muito simples, estendendo a classe CrudRepository.java estamos avisando ao Spring que o bean que ele está tratando é o passado por parâmetro ao CrudRepository&lt;Autor, Long&gt;.</p>
+
+<p>Agora que temos nossos beans e interfaces criadas é hora de criar a classe que irá disponibilizar o endpoint.</p>
+
+<p>Aproveitei a classe de configuração do Spring para criar um método que irá ser anotado com o @PostController.</p>
+
+<p>ProjetoFinal</p>
+
+<p><img src="/athosbonner.github.io/assets/img/5-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 5</p>
+
+<p>Depois de criado é só inicializar o servidor e acessar o endereço http://localhost:8080/ verá a imagem abaixo em seu navegador.</p>
+
+<p>Perceba que ele disponibiliza os nossos beans criados e se você acessar um desses links verá o objeto que setamos na imagem 5.</p>
+
+<p>localhost</p>
+
+<p><img src="/athosbonner.github.io/assets/img/6-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 6</p>
+
+<p>Livros</p>
+
+<p><img src="/athosbonner.github.io/assets/img/7-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 7</p>
+
+<p>Por padrão o RestRepository cria o profile/, mas o que tem nele ?</p>
+
+<p>Se acessarmos o endereço http://localhost:8080/profile/autors verá toda as meta-informações do autors conforme exemplo na imagem abaixo.</p>
+
+<p>profile</p>
+
+<p><img src="/athosbonner.github.io/assets/img/8-spring_boot.png" alt="I and My friends" /></p>
+
+<p>Imagem 8</p>
+
+<p>Realmente foi muito fácil.</p>
+
+<p>Criar um endpoint com Spring é muito fácil e rápido ajudando assim a vida do programador, para melhorar a segurança podemos usar o Spring Security, também adicionar um banco de dados e usar o Hibernate para mapear as tabelas.</p>
+
+<p>Esse foi um pequeno exemplo do poder desta ferramenta que tem muito mais a ser explorada.</p>
+
+<p>Se tem alguma coisa a corrigir ou acrescentar, deixa nos comentários aqui que vai ser de boa ajuda.</p>
+
+<p>Todo o código está no gitHub acessa lá e baixa para testar.</p>
+
+<p>Baixar o código no meu gitHub</p>
+
+<p>Espero ter ajudado.</p>
+
+<p>See you later….</p>
+:ET

@@ -1,0 +1,66 @@
+I"�
+<p>Fala galera!</p>
+
+<p>Em alguns momentos do nosso trabalho é essencial sairmos do raio de visão de um problema e tentar resolver ele de forma isolada.</p>
+
+<p>Então resolvi listar quatro ferramentas Online para teste de algumas linguagens.</p>
+
+<p>Editor de JavaScript</p>
+
+<p>https://jsfiddle.net/</p>
+
+<p>Essa ferramenta lhe dá suporte tanto de JavaScript como de CSS e lhe fornece uma interface bem interativa já com um exemplo.</p>
+
+<p>Você pode escolher testar script em JQuery, Vue, React, React + JSX, Preact, TypeScript, CoffeeScript, SCSS, CSS Grid (Responsive), Bootstrap e PostCss.</p>
+
+<p><img src="/athosbonner.github.io/assets/img/editor_js.png" alt="I and My friends" /></p>
+
+<p>Editor de SQL</p>
+
+<p>http://sqlfiddle.com/</p>
+
+<p>Esse editor dá suporte a vários bancos de dados e lhe permite executar Sqls depois de criar suas tabelas.
+Você tem como ver exemplos de script e algumas coisas mais.
+Para quem está aprendendo uma nova sintaxe é um ótimo aliado.</p>
+
+<p>Vale a pena deixar na lista para quando precisar.</p>
+
+<p>Ele dá suporte a :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MySql 5.6
+Oracle 11g R2
+PostgreSQL 9.6
+PostgreSQL 9.3
+SQLite (WebSQL)
+SQLite (SQL.js)
+MS SQL Server 2017
+</code></pre></div></div>
+
+<p><img src="/athosbonner.github.io/assets/img/editor_sql.png" alt="I and My friends" /></p>
+
+<p>CSS</p>
+
+<p>http://www.cssdesk.com/</p>
+
+<p>Essa ferramenta é bem simples e muito útil, ela é dividida em três partes, na lateral esquerda você edita o CSS e o HTML e na maior parte que é a direita fica o design do que você está alterando.</p>
+
+<p>Bem legal.</p>
+
+<p><img src="/athosbonner.github.io/assets/img/editor_css.png" alt="I and My friends" /></p>
+
+<p>IDE Oline</p>
+
+<p>https://aws.amazon.com/pt/cloud9/</p>
+
+<p>O AWS Cloud9 é um ambiente de desenvolvimento integrado (IDE) que permite escrever, executar e depurar código usando apenas um navegador.</p>
+
+<p>O ambiente inclui um editor de código, um depurador e um terminal. O Cloud9 é fornecido com ferramentas essenciais para linguagens de programação comuns, incluindo JavaScript, Python e PHP, entre outras, para que você não precise instalar arquivos ou configurar a máquina de desenvolvimento para iniciar novos projetos. Como o IDE do Cloud9 é baseado na nuvem, você pode trabalhar nos projetos no escritório, em casa ou em qualquer lugar usando uma máquina conectada à Internet.</p>
+
+<p><img src="/athosbonner.github.io/assets/img/amazon_pares.png" alt="I and My friends" /></p>
+
+<p>Bom galera precisei de um desses recentemente e resolvi fazer um compilado para ajudar quem precisa.</p>
+
+<p>Espero ter ajudado.</p>
+
+<p>See you later….</p>
+:ET

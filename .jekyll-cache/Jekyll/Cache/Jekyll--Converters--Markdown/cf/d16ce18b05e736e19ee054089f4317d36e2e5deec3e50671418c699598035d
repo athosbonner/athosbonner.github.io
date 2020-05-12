@@ -1,0 +1,100 @@
+I"�<p>O java 8 trouxe muitas mudanças, já vimos aqui algumas, como Interfaces Funcionais ou em Stream parte 1 e Stream parte 2.</p>
+
+<p>Mas uma delas que pouco é comentada e que chamou muita minha atenção foi a classe Optional.</p>
+
+<p>Essa classe, encapsula o retorno de métodos e verificar se um valor do tipo <T> existe ou não em um objeto.</T></p>
+
+<p>Com isso podemos evitar o tão conhecido e chato NullpointerException.</p>
+
+<p>Também não vamos mais precisar fazer verificações do tipo: if (client != null).</p>
+
+<p>E o melhor o seu código irá ficar mais simples, limpo e fácil.</p>
+
+<p>Abaixo mostro alguns métodos que ele possui.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>empty – Retorna uma instância vazia do Optional.
+
+Motódo: public static &lt;T&gt; Optional&lt;T&gt; empty​()
+
+Implemetação:
+
+  Optional&lt;String&gt; op = Optional.empty();
+
+ofNullable – Se não for nulo, retorna o valor, caso contrário retorna um Optional vazio.
+
+Método:  public static &lt;T&gt; Optional&lt;T&gt; ofNullable​(T value)
+
+Implemetação:
+
+String conta = null;		
+Optional&lt;String&gt; receber = Optional.ofNullable(conta);
+
+of – Retorna um Optional com o valor se o mesmo não for nulo.
+
+Método: public static &lt;T&gt; Optional&lt;T&gt; of​(T value)
+
+Implementação:
+
+ Optional&lt;String&gt; pegar = Optional.of(conta);
+
+isPresent – Retorna true se existir o valor, caso contrário retorna false.
+
+Método: public boolean isPresent​()
+
+Implementação:
+
+Optional&lt;String&gt; pegar = Optional.of(conta);		
+if(pegar.isPresent()) {
+	System.out.println("Haloo");
+}
+
+filter – Se existir valor e for correspondente a condição especificada é retornado um Optional com o valor, caso contrário retorna um Optional vazio.
+veja mais aqui sobre o filter.
+
+Método: public Optional&lt;T&gt; filter​(Predicate&lt;? super T&gt; predicate)
+
+Implementação:
+
+String numeroConta = pegar.filter((conta) -&gt; conta.equals("123456")).get();
+
+ifPresent – Se existir valor executa a ação determinada com esse valor verificado, caso contrário, não faz nada.
+
+Método: public void ifPresent​(Consumer&lt;? super T&gt; action)
+
+Implementação:
+
+pegar.ifPresent((item)-&gt;item.replace("Guaraná", "barrio de chop"));
+
+get – Se o valor existir, retorna o valor, caso contrário é lançado uma exceção do tipo NoSuchElementException
+
+Método: public T get​()
+
+Implementação:
+
+Optional&lt;String&gt; heroi = Optional.of(homenDeFerro);
+String definirAcoes = heroi.get();
+
+map – Se existir o valor, retorna um Optional com o resultado da aplicação usada na condição do map, caso contrário, retorna um Optional vazio.
+Já mostrei como funciona o map aqui em outro post.
+
+Método: public &lt;U&gt; Optional&lt;U&gt; map​(Function&lt;? super T,? extends U&gt; mapper)
+
+implementação:
+
+Optional&lt;String&gt; pegar = Optional.of(homenDeFerro).map(String::toUpperCase);
+</code></pre></div></div>
+
+<p>Bom galera, esses são alguns dos métodos que a classe nos proporciona, mas usem com moderação, saiba tratar bem as validações e informar as mensagens dos erros corretos.</p>
+
+<p>Quis mostrar um pouco do poder dessa classe implementada no java 8, espero que tenha ajudado.</p>
+
+<p>Se tem alguma coisa a corrigir ou acrescentar, deixa nos comentários aqui que vai ser de boa ajuda.</p>
+
+<p>Espero ter ajudado.</p>
+
+<p>See you later…</p>
+
+<p>PARA SABER MAIS:</p>
+
+<p>https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#orElseGet-java.util.function.Supplier-</p>
+:ET

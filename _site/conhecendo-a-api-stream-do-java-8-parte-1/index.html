@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Conhecendo a API Stream do java 8 – Parte 1 - Blog pessoal de Athos Bonner</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Blog pessoal de Athos Bonner" property="og:site_name">
+  
+    <meta content="Conhecendo a API Stream do java 8 – Parte 1" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes." property="og:description">
+  
+  
+    <meta content="http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-1/" property="og:url">
+  
+  
+    <meta content="2017-09-12T07:32:20-03:00" property="article:published_time">
+    <meta content="http://localhost:4000/about/" property="article:author">
+  
+  
+    <meta content="http://localhost:4000/athosbonner.github.io/assets/img/stream-parte-1.png" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Holidays" property="article:tag">
+    
+    <meta content="Hawaii" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@athosbonner">
+  
+    <meta name="twitter:title" content="Conhecendo a API Stream do java 8 – Parte 1">
+  
+  
+    <meta name="twitter:url" content="http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-1/">
+  
+  
+    <meta name="twitter:description" content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes.">
+  
+  
+    <meta name="twitter:image:src" content="http://localhost:4000/athosbonner.github.io/assets/img/stream-parte-1.png">
+  
+
+	<meta name="description" content="You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/athosbonner.github.io/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/athosbonner.github.io/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/athosbonner.github.io/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/athosbonner.github.io/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/athosbonner.github.io/"><img src="/athosbonner.github.io/assets/img/athosbonner.jpg" alt="Athos Bonner"></a>
+      </div>
+      <div class="author-name">Athos Bonner</div>
+      <p>Meu nome é Athos Bonner. Sou desenvoldedor de software e nas horas vagas escrevo, assisto séries, estudo, leio livros sobre biografias e o mais importante, corro de 3 a 10km.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/athosbonner" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="http://github.com/athosbonner" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/athos-bonner-28893441" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:athos.sti@hotmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Athos Bonner</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <figure>
+        <img class="page-image" src=/athosbonner.github.io/assets/img/stream-parte-1.png alt="Conhecendo a API Stream do java 8 – Parte 1">
+        
+      </figure>
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Conhecendo a API Stream do java 8 – Parte 1</h1>
+        <div class="page-date"><span>2017, Sep 12&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Dentre as funcionalidades que o java 8 trouxe está a API Stream que nos permite trabalhar de forma diferente com fluxo de dados, proporcionando o desenvolvedor escrever um número menor de linha de código de forma mais simples.</p>
+
+<p>Nesta série de post vamos falar um pouco sobre a API Stream que foi incorporada no java 8.</p>
+
+<p>A API Stream do Java é responsável por manter a ordenação dos dados como está na fonte.</p>
+
+<p>As operações agregadas ou operações em massa são operações que nos permitem expressar e manipular elementos de fluxo de maneira fácil e clara.</p>
+
+<p>De princípio vamos entender melhor o que é uma Java Stream .
+Java.util.Stream</p>
+
+<p>Em java o pacote java.util.Stream representa um fluxo de dados onde poderá ser executado uma ou mais operações.</p>
+
+<p>Os fluxos de uma Stream é criado a partir de uma origem, por exemplo, podemos usar o java.util.Collection como uma lista para termos um fluxo de Stream, uma vez criada a origem podemos explorar todo o recurso do mesmo.</p>
+
+<p>Uma vantagem do Stream é que você pode fazer um fluxo sequencial ou paralelo.
+Quais as características do Stream ?</p>
+
+<p>Abaixo está listado 6 características do Stream.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Não é uma estrutura de dados
+Foi projetado para o lamba com o surgimento no Java 8
+Não suporta o acesso indexado
+Podemos converter em matrizes ou listas
+Suporta lazy access
+Suporta paralelismo
+</code></pre></div></div>
+
+<p>Agora que já sabemos o que é o Stream vamos colocar a mão na massa.</p>
+
+<p>A seguir vou mostrar algumas funcionalidade que podemos explorar do java.util.Stream. Todo o código implementado aqui está disponível no GitHub.
+Criando fluxos com Stream</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            Stream&lt;Integer&gt; useStream = Stream.of(1,2,3,4,5);
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>Ou podemos passar um objeto em Stream.of() também.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            Stream&lt;Integer&gt; useStream = Stream.of(new Integer[] {1,2,3,4,5});
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>Resultados:</p>
+
+<p>1
+2
+3
+4
+5</p>
+
+<p>Usando uma lista como origem de fluxo.
+List.stream ()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+            lista.add("Homemerro");
+            lista.add("Capitãoica");
+            lista.add("Doutoranho");
+
+            Stream&lt;String&gt; useStream = lista.stream();
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>A partir da lista podemos explorar todo os recursos do Stream.</p>
+
+<p>Resultado:</p>
+
+<p>Homem de Ferro
+Capitão America
+Doutor Estranho</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            Stream.generate() ou Stream.iterate()
+
+            public static void main(String[] args) {
+
+            Stream&lt;Date&gt; useStream = Stream.generate(() -&gt;
+            {
+            return new Date();
+            });
+
+            useStream.forEach(p -&gt; System.out.println(p));
+            }
+</code></pre></div></div>
+
+<p>O Stream.generate vai gerar várias vezes o que você mandar ele fazer, no meu caso mandei apenas ele imprimir a data atual, conforme a saída abaixo.</p>
+
+<p>Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019</p>
+
+<p>Outro recurso do Stream é o Stream.builder, ele nos fornece várias opções para trabalhar com o tipo que você escolher, no código abaixo estou explorando o Stream.builder do tipo String.
+Stream.builder()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+            //Usando Stream Builder
+            Stream.Builder&lt;String&gt; useStreamBuilder = Stream.builder();
+
+            //adicionando elementos string ao Stream
+            Stream&lt;String&gt; useStream = useStreamBuilder
+            .add("Capitã marvel")
+            .add("Avengers: Endgame")
+            .build();
+
+            //Listando os elementos adicionado e imprimindo
+            useStream.forEach(System.out::println);
+
+            }
+</code></pre></div></div>
+
+<p>Agora que você já sabe criar uma Stream e usar, vou mostrar alguns métodos do Stream que nos ajuda de forma simples.
+Conhecendo e usando métodos do Stream</p>
+
+<p>Vamos explorar o método filter() do Stream.
+Método filter()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            List&lt;Cliente&gt; lista = new ArrayList&lt;&gt;();
+
+            Stream&lt;Cliente&gt; stream = lista.stream().filter(item-&gt; item.getNacionalidade().equals("Brasileira"));
+            stream.forEach(System.out::println);
+</code></pre></div></div>
+
+<p>No código acima filtramos todos os clientes de nacionalidade brasileira.</p>
+
+<p>Junto com o filter podemos usar outros método de agregação para melhorar ainda mais nosso filtro.</p>
+
+<p>Abaixo estou usando o método avarege() que nos permite calcular a média dos valores dos elementos dentro da lista de Clientes que estamos percorrendo.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).average().getAsDouble();
+</code></pre></div></div>
+
+<p>Usei o método avarege(), mas também posso usar outros como o  count(),  sum(), min(), max() como mostrado abaixo.
+Usando Min()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).min().getAsInt();
+</code></pre></div></div>
+
+<p>Usando Max()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).max().getAsInt();
+</code></pre></div></div>
+
+<p>Usando Count()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).count();
+</code></pre></div></div>
+
+<p>Usando Sum()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).sum();
+</code></pre></div></div>
+
+<p>Como podemos ver o Stream facilita muito nosso trabalho, ainda temos muito o que explorar nessa API, mas por hora é isso.</p>
+
+<p>O que você achou, fácil, não ?</p>
+
+<p>Isso é um pouquinho do que o Stream é capaz de nos proporcionar, em futuros artigos irei mostrar outras funcionalidades mais detalhadas do Stream, que já me salvou muitas vezes.</p>
+
+<p>See you later…</p>
+
+<p>Download dos exemplos desse post no meu GitHub. Acesse aqui</p>
+
+<p>PARA SABER MAIS:</p>
+
+<p>Java 8 Stream API
+https://howtodoinjava.com/java8/java-streams-by-examples/</p>
+
+<p>Java Code Examples for java.util.stream.Stream.builder();
+https://www.programcreek.com/java-api-examples/?class=java.util.stream.Stream&amp;method=builder</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Conhecendo a API Stream do java 8 – Parte 1&url=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-1/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-1/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/conhecendo-a-api-stream-do-java-8-parte-1/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/athosbonner.github.io/tags#Holidays" class="tag">&#35; Holidays</a>
+          
+            <a href="/athosbonner.github.io/tags#Hawaii" class="tag">&#35; Hawaii</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+    <div id="disqus_thread" class="article-comments"></div>
+    <script>
+      (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//mr-brown.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>

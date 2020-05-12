@@ -1,0 +1,197 @@
+I" <p>Dentre as funcionalidades que o java 8 trouxe está a API Stream que nos permite trabalhar de forma diferente com fluxo de dados, proporcionando o desenvolvedor escrever um número menor de linha de código de forma mais simples.</p>
+
+<p>Nesta série de post vamos falar um pouco sobre a API Stream que foi incorporada no java 8.</p>
+
+<p>A API Stream do Java é responsável por manter a ordenação dos dados como está na fonte.</p>
+
+<p>As operações agregadas ou operações em massa são operações que nos permitem expressar e manipular elementos de fluxo de maneira fácil e clara.</p>
+
+<p>De princípio vamos entender melhor o que é uma Java Stream .
+Java.util.Stream</p>
+
+<p>Em java o pacote java.util.Stream representa um fluxo de dados onde poderá ser executado uma ou mais operações.</p>
+
+<p>Os fluxos de uma Stream é criado a partir de uma origem, por exemplo, podemos usar o java.util.Collection como uma lista para termos um fluxo de Stream, uma vez criada a origem podemos explorar todo o recurso do mesmo.</p>
+
+<p>Uma vantagem do Stream é que você pode fazer um fluxo sequencial ou paralelo.
+Quais as características do Stream ?</p>
+
+<p>Abaixo está listado 6 características do Stream.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Não é uma estrutura de dados
+Foi projetado para o lamba com o surgimento no Java 8
+Não suporta o acesso indexado
+Podemos converter em matrizes ou listas
+Suporta lazy access
+Suporta paralelismo
+</code></pre></div></div>
+
+<p>Agora que já sabemos o que é o Stream vamos colocar a mão na massa.</p>
+
+<p>A seguir vou mostrar algumas funcionalidade que podemos explorar do java.util.Stream. Todo o código implementado aqui está disponível no GitHub.
+Criando fluxos com Stream</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            Stream&lt;Integer&gt; useStream = Stream.of(1,2,3,4,5);
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>Ou podemos passar um objeto em Stream.of() também.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            Stream&lt;Integer&gt; useStream = Stream.of(new Integer[] {1,2,3,4,5});
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>Resultados:</p>
+
+<p>1
+2
+3
+4
+5</p>
+
+<p>Usando uma lista como origem de fluxo.
+List.stream ()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+
+            List&lt;String&gt; lista = new ArrayList&lt;&gt;();
+            lista.add("Homemerro");
+            lista.add("Capitãoica");
+            lista.add("Doutoranho");
+
+            Stream&lt;String&gt; useStream = lista.stream();
+            useStream.forEach(p -&gt; System.out.println(p));
+
+            }
+</code></pre></div></div>
+
+<p>A partir da lista podemos explorar todo os recursos do Stream.</p>
+
+<p>Resultado:</p>
+
+<p>Homem de Ferro
+Capitão America
+Doutor Estranho</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            Stream.generate() ou Stream.iterate()
+
+            public static void main(String[] args) {
+
+            Stream&lt;Date&gt; useStream = Stream.generate(() -&gt;
+            {
+            return new Date();
+            });
+
+            useStream.forEach(p -&gt; System.out.println(p));
+            }
+</code></pre></div></div>
+
+<p>O Stream.generate vai gerar várias vezes o que você mandar ele fazer, no meu caso mandei apenas ele imprimir a data atual, conforme a saída abaixo.</p>
+
+<p>Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019
+Mon Mar 04 15:01:35 BRT 2019</p>
+
+<p>Outro recurso do Stream é o Stream.builder, ele nos fornece várias opções para trabalhar com o tipo que você escolher, no código abaixo estou explorando o Stream.builder do tipo String.
+Stream.builder()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            public static void main(String[] args) {
+            //Usando Stream Builder
+            Stream.Builder&lt;String&gt; useStreamBuilder = Stream.builder();
+
+            //adicionando elementos string ao Stream
+            Stream&lt;String&gt; useStream = useStreamBuilder
+            .add("Capitã marvel")
+            .add("Avengers: Endgame")
+            .build();
+
+            //Listando os elementos adicionado e imprimindo
+            useStream.forEach(System.out::println);
+
+            }
+</code></pre></div></div>
+
+<p>Agora que você já sabe criar uma Stream e usar, vou mostrar alguns métodos do Stream que nos ajuda de forma simples.
+Conhecendo e usando métodos do Stream</p>
+
+<p>Vamos explorar o método filter() do Stream.
+Método filter()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            List&lt;Cliente&gt; lista = new ArrayList&lt;&gt;();
+
+            Stream&lt;Cliente&gt; stream = lista.stream().filter(item-&gt; item.getNacionalidade().equals("Brasileira"));
+            stream.forEach(System.out::println);
+</code></pre></div></div>
+
+<p>No código acima filtramos todos os clientes de nacionalidade brasileira.</p>
+
+<p>Junto com o filter podemos usar outros método de agregação para melhorar ainda mais nosso filtro.</p>
+
+<p>Abaixo estou usando o método avarege() que nos permite calcular a média dos valores dos elementos dentro da lista de Clientes que estamos percorrendo.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).average().getAsDouble();
+</code></pre></div></div>
+
+<p>Usei o método avarege(), mas também posso usar outros como o  count(),  sum(), min(), max() como mostrado abaixo.
+Usando Min()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).min().getAsInt();
+</code></pre></div></div>
+
+<p>Usando Max()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).max().getAsInt();
+</code></pre></div></div>
+
+<p>Usando Count()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).count();
+</code></pre></div></div>
+
+<p>Usando Sum()</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            double stream = lista.stream()
+            .filter(item-&gt; item.getNacionalidade().equals("Brasileiro"))
+            .mapToInt(item-&gt; item.getIdade()).sum();
+</code></pre></div></div>
+
+<p>Como podemos ver o Stream facilita muito nosso trabalho, ainda temos muito o que explorar nessa API, mas por hora é isso.</p>
+
+<p>O que você achou, fácil, não ?</p>
+
+<p>Isso é um pouquinho do que o Stream é capaz de nos proporcionar, em futuros artigos irei mostrar outras funcionalidades mais detalhadas do Stream, que já me salvou muitas vezes.</p>
+
+<p>See you later…</p>
+
+<p>Download dos exemplos desse post no meu GitHub. Acesse aqui</p>
+
+<p>PARA SABER MAIS:</p>
+
+<p>Java 8 Stream API
+https://howtodoinjava.com/java8/java-streams-by-examples/</p>
+
+<p>Java Code Examples for java.util.stream.Stream.builder();
+https://www.programcreek.com/java-api-examples/?class=java.util.stream.Stream&amp;method=builder</p>
+:ET
